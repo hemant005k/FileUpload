@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>File Upload</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+
+    <script type="text/javascript" src="app.module.js"></script>
+    <script type="text/javascript" src="controllers.js"></script>
+    <script type="text/javascript" src="directives.js"></script>
+    <script type="text/javascript" src="services.js"></script>
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body ng-controller="FileUploadController">
+    <h2>File Upload</h2>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form id="upload" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="myFileField">Select a file: </label>
+                    <input type="file" name='file' demo-file-model="myFile"  class="form-control" id ="myFileField" multiple="true"></input>
+                </div>
+                <button ng-click="uploadFile()" class = "btn btn-primary">Upload File</button>
+            </form>
+        </div>
+    </div>
+    <div>{{serverResponse}}</div>
+    <h1>List of Images</h1>
+    <table class="table table-bordered" >
+        <tr>
+            <th>Image</th>
+            <th>Original File name</th>
+            <th>Action</th>
+        </tr>
+        <tr ng-repeat="f in getList">
+            <td>
+                <img style="width: 50px; height: 50px;" ng-src="http://localhost:3000/uploads/{{f.originalname}}">
+            </td>
+            <td>{{f.originalname}}</td>
+            <td><button style="height: 25px;" class="btn btn-danger" ng-click="deleteFile(f)">delete</button></td>
+        </tr>
+    </table>
+
+</body>
+</html>
